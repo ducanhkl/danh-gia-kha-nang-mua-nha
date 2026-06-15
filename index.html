@@ -3,75 +3,55 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Máy tính vay mua nhà 2025 — Tính lãi suất, DTI, Risk Score | Công cụ miễn phí</title>
-<meta name="description" content="Công cụ tính toán vay mua nhà miễn phí: tính tiền trả hàng tháng, DTI ratio, LTV ratio, risk score rủi ro, vốn tự có cần chuẩn bị. Dành cho người mua nhà lần đầu tại Việt Nam 2025.">
-<meta name="keywords" content="máy tính vay mua nhà, tính lãi suất vay ngân hàng, DTI ratio, vay mua nhà 2025, lãi suất mua nhà việt nam, tính tiền trả hàng tháng, vay ngân hàng mua nhà, risk score vay nhà">
+<title>Máy tính vay mua nhà 2025 — DTI, LTV, Risk Score, Residual Income | Miễn phí</title>
+<meta name="description" content="Tính khả năng vay mua nhà theo lương thực nhận, chi tiêu hàng tháng, vốn tự có. Áp dụng 4 công thức quốc tế: Residual Income (Harvard), 28/36 Rule, OECD 30%, Demographia Median Multiple.">
+<meta name="keywords" content="máy tính vay mua nhà, tính lãi suất vay ngân hàng, DTI ratio, residual income, 28/36 rule, vay mua nhà 2025, lãi suất mua nhà việt nam, tính tiền trả hàng tháng">
 <meta name="robots" content="index, follow">
-<meta property="og:title" content="Máy tính vay mua nhà 2025 — DTI, LTV, Risk Score">
-<meta property="og:description" content="Tính toán khả năng vay mua nhà theo thu nhập, vốn tự có, lãi suất thực tế tại Việt Nam. Hiển thị Risk Score và công thức tính chi tiết.">
+<meta property="og:title" content="Máy tính vay mua nhà 2025 — Residual Income & Risk Score">
+<meta property="og:description" content="Tính toán khả năng mua nhà theo lương thực nhận, chi tiêu, vốn tự có. Dựa trên nghiên cứu Harvard JCHS, OECD, Demographia.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="vi_VN">
-<link rel="canonical" href="#">
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "Máy tính vay mua nhà 2025",
-  "description": "Công cụ tính toán khả năng vay mua nhà theo thu nhập, vốn tự có, lãi suất tại Việt Nam",
-  "applicationCategory": "FinanceApplication",
-  "operatingSystem": "Web",
-  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "VND" },
-  "inLanguage": "vi"
-}
+{"@context":"https://schema.org","@type":"WebApplication","name":"Máy tính vay mua nhà 2025","description":"Tính khả năng vay mua nhà theo lương thực nhận và chi tiêu hàng tháng tại Việt Nam","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"VND"},"inLanguage":"vi"}
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: #f5f5f3;
-    color: #1a1a1a;
-    padding: 2rem 1rem 3rem;
-    font-size: 15px;
-    line-height: 1.6;
-  }
-  .container { max-width: 840px; margin: 0 auto; }
-
-  /* Hero header */
-  .hero { margin-bottom: 1.5rem; }
-  .hero h1 { font-size: 24px; font-weight: 600; margin-bottom: 6px; }
-  .hero p { font-size: 14px; color: #666; max-width: 620px; }
-  .hero-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f3; color: #1a1a1a; padding: 2rem 1rem 3rem; font-size: 15px; line-height: 1.6; }
+  .container { max-width: 860px; margin: 0 auto; }
+  h1 { font-size: 24px; font-weight: 600; margin-bottom: 6px; }
+  .subtitle { font-size: 14px; color: #666; max-width: 640px; }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px 0 1.5rem; }
   .tag { font-size: 11px; background: #fff; border: 1px solid #e5e5e2; border-radius: 20px; padding: 3px 10px; color: #555; }
-
-  /* Cards */
   .sec { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: .06em; margin: 1.1rem 0 .55rem; }
   .card { background: #fff; border: 1px solid #e5e5e2; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 1rem; }
   .card-title { font-size: 15px; font-weight: 500; margin-bottom: 1rem; }
-
-  /* Sliders */
+  .card-title small { font-size: 11px; font-weight: 400; color: #aaa; margin-left: 8px; }
   .sr { display: flex; align-items: center; gap: 10px; margin: .4rem 0 .75rem; }
-  .sr label { font-size: 13px; color: #555; min-width: 210px; }
+  .sr label { font-size: 13px; color: #555; min-width: 220px; }
   .sr input[type=range] { flex: 1; height: 4px; accent-color: #185FA5; cursor: pointer; }
   .sv { font-size: 14px; font-weight: 500; min-width: 90px; text-align: right; color: #185FA5; }
-
-  /* Metrics */
+  .input-divider { border: none; border-top: 1px dashed #e5e5e2; margin: .75rem 0; }
   .mgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; }
   .metric { background: #f8f8f6; border-radius: 8px; padding: .75rem 1rem; }
   .mlabel { font-size: 11px; color: #888; margin-bottom: 3px; }
-  .mval { font-size: 20px; font-weight: 500; }
+  .mval { font-size: 19px; font-weight: 500; }
   .ok { color: #0F6E56; } .warn { color: #854F0B; } .danger { color: #A32D2D; }
-
-  /* Progress bar */
-  .progress-label-row { display: flex; justify-content: space-between; font-size: 10px; color: #bbb; margin-bottom: 3px; }
   .pbg { background: #eee; border-radius: 4px; height: 8px; overflow: hidden; margin-top: 5px; }
   .pf { height: 100%; border-radius: 4px; transition: width .3s, background .3s; }
-
-  /* Alert */
   .alrt { border-left: 3px solid; padding: .65rem 1rem; font-size: 13px; margin-top: .75rem; border-radius: 0 4px 4px 0; }
-  .alrt.ok  { background: #E1F5EE; border-color: #1D9E75; color: #085041; }
+  .alrt.ok { background: #E1F5EE; border-color: #1D9E75; color: #085041; }
   .alrt.warn { background: #FAEEDA; border-color: #BA7517; color: #633806; }
   .alrt.danger { background: #FCEBEB; border-color: #E24B4A; color: #501313; }
+
+  /* Residual income highlight */
+  .residual-box { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: .75rem; }
+  .res-card { border-radius: 10px; padding: 1rem 1.1rem; }
+  .res-card.positive { background: #E1F5EE; border: 1px solid #A8DFC8; }
+  .res-card.neutral  { background: #FAEEDA; border: 1px solid #F0C589; }
+  .res-card.negative { background: #FCEBEB; border: 1px solid #F0AAAA; }
+  .res-label { font-size: 11px; color: #666; margin-bottom: 3px; }
+  .res-val { font-size: 22px; font-weight: 500; }
 
   /* Scenarios */
   .sc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
@@ -82,11 +62,13 @@
   .scr { display: flex; justify-content: space-between; font-size: 12px; color: #888; margin: 3px 0; }
   .scr span:last-child { color: #1a1a1a; font-weight: 500; }
 
-  /* Tabs */
-  .tab-row { display: flex; gap: 8px; margin-bottom: .75rem; }
+  /* Tabs & Chart */
+  .tab-row { display: flex; gap: 8px; margin-bottom: .75rem; flex-wrap: wrap; }
   .tab { font-size: 13px; padding: 5px 14px; border-radius: 20px; border: 1px solid #ddd; cursor: pointer; background: transparent; color: #666; }
   .tab.active { background: #E6F1FB; color: #185FA5; border-color: transparent; }
   .chart-wrap { position: relative; height: 260px; }
+  .legend-row { display: flex; gap: 16px; font-size: 12px; color: #666; margin-bottom: 8px; flex-wrap: wrap; }
+  .ldot { width: 10px; height: 10px; border-radius: 2px; display: inline-block; margin-right: 4px; vertical-align: middle; }
 
   /* Risk */
   .risk-score-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
@@ -94,8 +76,6 @@
   .risk-label { font-size: 13px; font-weight: 500; padding: 4px 12px; border-radius: 12px; }
   .risk-gauge { display: flex; height: 14px; border-radius: 7px; overflow: hidden; margin: 8px 0; }
   .risk-seg { flex: 1; transition: opacity .3s; }
-
-  /* Formula */
   .formula-box { background: #f8f8f6; border-radius: 8px; padding: .9rem 1.1rem; font-size: 12px; line-height: 1.9; color: #666; }
   .formula-box code { font-family: 'Courier New', monospace; font-size: 12px; color: #1a1a1a; background: #eee; padding: 1px 6px; border-radius: 3px; }
   .frow { display: flex; gap: 8px; align-items: baseline; margin: 2px 0; flex-wrap: wrap; }
@@ -105,25 +85,26 @@
   .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   @media (max-width: 480px) { .two-col { grid-template-columns: 1fr; } }
 
-  /* Legend */
-  .legend-row { display: flex; gap: 16px; font-size: 12px; color: #666; margin-bottom: 8px; }
-  .ldot { width: 10px; height: 10px; border-radius: 2px; display: inline-block; margin-right: 4px; vertical-align: middle; }
+  /* Progress label */
+  .plrow { display: flex; justify-content: space-between; font-size: 10px; color: #bbb; margin-bottom: 3px; }
 
   /* Glossary */
   .glossary { margin-top: 2rem; }
-  .glossary h2 { font-size: 18px; font-weight: 500; margin-bottom: 1rem; }
-  .glossary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+  .glossary h2 { font-size: 18px; font-weight: 500; margin-bottom: .3rem; }
+  .glossary .gl-sub { font-size: 13px; color: #666; margin-bottom: 1rem; }
+  .glossary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; }
   .gcard { background: #fff; border: 1px solid #e5e5e2; border-radius: 10px; padding: 1rem 1.1rem; }
-  .gcard-title { font-size: 14px; font-weight: 500; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+  .gcard-title { font-size: 14px; font-weight: 500; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
   .gbadge { font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 10px; }
   .gbadge.blue { background: #E6F1FB; color: #0C447C; }
   .gbadge.green { background: #E1F5EE; color: #085041; }
   .gbadge.amber { background: #FAEEDA; color: #633806; }
   .gbadge.purple { background: #EEEDFE; color: #3C3489; }
+  .gbadge.red { background: #FCEBEB; color: #6B1A1A; }
   .gcard p { font-size: 13px; color: #555; line-height: 1.6; }
-  .gcard .formula { font-size: 12px; color: #888; background: #f8f8f6; padding: 6px 10px; border-radius: 6px; margin-top: 8px; font-family: 'Courier New', monospace; }
-  .gcard .thresholds { margin-top: 8px; }
-  .gcard .thresholds table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .gcard .formula { font-size: 12px; color: #888; background: #f8f8f6; padding: 6px 10px; border-radius: 6px; margin-top: 8px; font-family: 'Courier New', monospace; line-height: 1.7; }
+  .gcard .source { font-size: 11px; color: #aaa; margin-top: 6px; font-style: italic; }
+  .gcard .thresholds table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 8px; }
   .gcard .thresholds td { padding: 3px 6px; border-bottom: 1px solid #f0f0ee; }
   .gcard .thresholds td:first-child { color: #888; }
   .gcard .thresholds td:last-child { font-weight: 500; text-align: right; }
@@ -132,200 +113,271 @@
   .faq { margin-top: 2rem; }
   .faq h2 { font-size: 18px; font-weight: 500; margin-bottom: 1rem; }
   .faq-item { border-bottom: 1px solid #e5e5e2; padding: 1rem 0; }
-  .faq-q { font-size: 14px; font-weight: 500; margin-bottom: 6px; color: #1a1a1a; }
+  .faq-q { font-size: 14px; font-weight: 500; margin-bottom: 6px; }
   .faq-a { font-size: 13px; color: #555; line-height: 1.7; }
 
   footer { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid #e5e5e2; font-size: 12px; color: #aaa; text-align: center; line-height: 1.8; }
+  @media (max-width: 600px) { .residual-box { grid-template-columns: 1fr; } .sr label { min-width: 160px; } }
 </style>
 </head>
 <body>
 <div class="container">
 
-  <header class="hero">
-    <h1>Máy tính vay mua nhà 2025</h1>
-    <p>Tính tiền trả hàng tháng, DTI ratio, LTV ratio và điểm rủi ro (Risk Score) dựa trên thu nhập và vốn tự có thực tế tại Việt Nam.</p>
-    <div class="hero-tags">
-      <span class="tag">Miễn phí</span>
-      <span class="tag">Lãi suất thực tế 2025</span>
-      <span class="tag">Risk Score</span>
-      <span class="tag">Công ty nước ngoài</span>
-      <span class="tag">Không cần đăng ký</span>
-    </div>
-  </header>
+<header style="margin-bottom:1.5rem">
+  <h1>Máy tính vay mua nhà 2025</h1>
+  <p class="subtitle">Dựa trên 4 nghiên cứu quốc tế: Harvard JCHS Residual Income, 28/36 Rule, OECD 30% Standard, Demographia Median Multiple.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px">
+    <span class="tag">Miễn phí</span>
+    <span class="tag">Harvard JCHS</span>
+    <span class="tag">Residual Income Method</span>
+    <span class="tag">28/36 Rule</span>
+    <span class="tag">OECD Standard</span>
+  </div>
+</header>
 
-  <main>
-    <div class="card">
-      <h2 class="card-title">Thông số đầu vào</h2>
-      <div class="sr"><label>Thu nhập hàng tháng (triệu đồng)</label><input type="range" id="income" min="0" max="200" step="1" value="15"><span class="sv" id="incomeVal">15 tr</span></div>
-      <div class="sr"><label>Vốn tự có sẵn (triệu đồng)</label><input type="range" id="equity" min="0" max="5000" step="50" value="600"><span class="sv" id="equityVal">600 tr</span></div>
-      <div class="sr"><label>Số tiền muốn vay (triệu đồng)</label><input type="range" id="loanAmt" min="0" max="8000" step="50" value="1000"><span class="sv" id="loanAmtVal">1,000 tr</span></div>
-      <div class="sr"><label>Thời hạn vay (năm)</label><input type="range" id="term" min="5" max="30" step="1" value="20"><span class="sv" id="termVal">20 năm</span></div>
-      <div class="sr"><label>Lãi suất / năm (%)</label><input type="range" id="rate" min="7" max="15" step="0.1" value="10.5"><span class="sv" id="rateVal">10.5%</span></div>
-      <div class="sr"><label>Quỹ khẩn cấp (số tháng lương)</label><input type="range" id="emergency" min="0" max="12" step="1" value="3"><span class="sv" id="emergencyVal">3 tháng</span></div>
-    </div>
+<main>
+  <!-- INPUT CARD -->
+  <div class="card">
+    <h2 class="card-title">Thông số đầu vào</h2>
 
-    <div class="card">
-      <h2 class="card-title">Tổng quan tài chính</h2>
-      <div class="mgrid" id="mainMetrics"></div>
-      <div style="margin-top:12px">
-        <div class="progress-label-row"><span>0%</span><span>An toàn ≤40%</span><span>Căng 50%</span><span>100%</span></div>
-        <div class="pbg"><div class="pf" id="dtiFill" style="width:0%"></div></div>
-      </div>
-      <div id="alertBox"></div>
+    <div class="sec">Thu nhập & chi tiêu</div>
+    <div class="sr">
+      <label>Lương thực nhận / tháng <span style="font-size:11px;color:#aaa">(sau thuế)</span></label>
+      <input type="range" id="income" min="0" max="200" step="1" value="15">
+      <span class="sv" id="incomeVal">15 tr</span>
     </div>
-
-    <div class="card">
-      <h2 class="card-title">Risk Score — Điểm rủi ro tổng hợp</h2>
-      <div class="risk-score-row">
-        <div><span class="risk-big" id="riskScore">—</span><span style="font-size:15px;color:#888"> /100</span></div>
-        <span class="risk-label" id="riskLabel">—</span>
-      </div>
-      <div class="risk-gauge" id="riskGauge"></div>
-      <div style="display:flex;justify-content:space-between;font-size:10px;color:#bbb;margin-bottom:1rem">
-        <span>0 Rất thấp</span><span>25 Thấp</span><span>50 Trung bình</span><span>75 Cao</span><span>100 Rất cao</span>
-      </div>
-      <div class="formula-box" id="formulaBox"></div>
+    <div class="sr">
+      <label>Số tiền phải tiêu / tháng</label>
+      <input type="range" id="expenses" min="0" max="50" step="0.5" value="8">
+      <span class="sv" id="expensesVal">8 tr</span>
+    </div>
+    <div class="sr">
+      <label>Quỹ khẩn cấp (số tháng lương)</label>
+      <input type="range" id="emergency" min="0" max="12" step="1" value="3">
+      <span class="sv" id="emergencyVal">3 tháng</span>
     </div>
 
-    <div class="card">
-      <h2 class="card-title">Cơ cấu vốn & giá trị nhà</h2>
-      <div class="two-col" id="houseBreakdown"></div>
+    <hr class="input-divider">
+    <div class="sec">Thông số khoản vay</div>
+    <div class="sr">
+      <label>Vốn tự có sẵn</label>
+      <input type="range" id="equity" min="0" max="5000" step="50" value="300">
+      <span class="sv" id="equityVal">300 tr</span>
     </div>
-
-    <div class="card">
-      <h2 class="card-title">3 kịch bản tối ưu (tự động theo lương)</h2>
-      <div class="sc-grid" id="scenarios"></div>
+    <div class="sr">
+      <label>Số tiền muốn vay</label>
+      <input type="range" id="loanAmt" min="0" max="8000" step="50" value="700">
+      <span class="sv" id="loanAmtVal">700 tr</span>
     </div>
-
-    <div class="card">
-      <div class="tab-row">
-        <button class="tab active" onclick="switchTab('balance')" id="tabBalance">Dư nợ theo thời gian</button>
-        <button class="tab" onclick="switchTab('breakdown')" id="tabBreakdown">Gốc vs Lãi theo năm</button>
-      </div>
-      <div class="legend-row" id="legendArea"></div>
-      <div class="chart-wrap">
-        <canvas id="mainChart" role="img" aria-label="Biểu đồ dư nợ vay theo thời gian">Biểu đồ dư nợ vay theo thời gian.</canvas>
-      </div>
+    <div class="sr">
+      <label>Thời hạn vay (năm)</label>
+      <input type="range" id="term" min="5" max="30" step="1" value="20">
+      <span class="sv" id="termVal">20 năm</span>
     </div>
+    <div class="sr">
+      <label>Lãi suất / năm (%)</label>
+      <input type="range" id="rate" min="7" max="15" step="0.1" value="10.5">
+      <span class="sv" id="rateVal">10.5%</span>
+    </div>
+  </div>
 
-    <!-- GLOSSARY -->
-    <section class="glossary" aria-label="Giải thích các chỉ số tài chính">
-      <h2>Giải thích các chỉ số</h2>
-      <div class="glossary-grid">
+  <!-- RESIDUAL INCOME -->
+  <div class="card">
+    <h2 class="card-title">Residual Income <small>Harvard Joint Center for Housing Studies</small></h2>
+    <div class="residual-box" id="residualBox"></div>
+    <div id="residualAlert"></div>
+    <div style="margin-top:.85rem;font-size:12px;color:#aaa;background:#f8f8f6;padding:.65rem 1rem;border-radius:6px">
+      <b style="color:#666">Công thức:</b> Residual Income = Lương thực nhận − Số tiền phải tiêu − Tiền trả vay hàng tháng<br>
+      <span>Nếu Residual Income &lt; 0 → <b>không đủ khả năng chi trả</b> (shelter poor theo Harvard JCHS)</span>
+    </div>
+  </div>
 
-        <div class="gcard">
-          <div class="gcard-title"><span class="gbadge blue">DTI</span>Debt-to-Income Ratio</div>
-          <p>Tỷ lệ nợ so với thu nhập — cho biết bao nhiêu phần trăm thu nhập hàng tháng dùng để trả nợ. Đây là chỉ số quan trọng nhất ngân hàng dùng để xét duyệt vay.</p>
-          <div class="formula">DTI (%) = Tiền trả hàng tháng ÷ Thu nhập × 100</div>
-          <div class="thresholds">
-            <table>
-              <tr><td>≤ 35%</td><td class="ok">Rất an toàn</td></tr>
-              <tr><td>36–40%</td><td class="ok">An toàn</td></tr>
-              <tr><td>41–50%</td><td class="warn">Căng thẳng</td></tr>
-              <tr><td>&gt; 50%</td><td class="danger">Rủi ro cao</td></tr>
-            </table>
-          </div>
+  <!-- METRICS -->
+  <div class="card">
+    <h2 class="card-title">Tổng quan các chỉ số</h2>
+    <div class="mgrid" id="mainMetrics"></div>
+    <div style="margin-top:12px">
+      <div class="plrow"><span>0%</span><span>An toàn ≤30%</span><span>Giới hạn 40%</span><span>Nguy hiểm 50%+</span></div>
+      <div class="pbg"><div class="pf" id="dtiFill" style="width:0%"></div></div>
+    </div>
+    <div id="alertBox"></div>
+  </div>
+
+  <!-- RISK SCORE -->
+  <div class="card">
+    <h2 class="card-title">Risk Score — Điểm rủi ro tổng hợp</h2>
+    <div class="risk-score-row">
+      <div><span class="risk-big" id="riskScore">—</span><span style="font-size:15px;color:#888"> /100</span></div>
+      <span class="risk-label" id="riskLabel">—</span>
+    </div>
+    <div class="risk-gauge" id="riskGauge"></div>
+    <div style="display:flex;justify-content:space-between;font-size:10px;color:#bbb;margin-bottom:1rem">
+      <span>0 Rất thấp</span><span>25 Thấp</span><span>50 Trung bình</span><span>75 Cao</span><span>100 Rất cao</span>
+    </div>
+    <div class="formula-box" id="formulaBox"></div>
+  </div>
+
+  <!-- HOUSE BREAKDOWN -->
+  <div class="card">
+    <h2 class="card-title">Cơ cấu vốn & giá trị nhà</h2>
+    <div class="two-col" id="houseBreakdown"></div>
+  </div>
+
+  <!-- SCENARIOS -->
+  <div class="card">
+    <h2 class="card-title">3 kịch bản tối ưu <small>tự động theo lương thực nhận</small></h2>
+    <div class="sc-grid" id="scenarios"></div>
+  </div>
+
+  <!-- CHART -->
+  <div class="card">
+    <div class="tab-row">
+      <button class="tab active" onclick="switchTab('balance')" id="tabBalance">Dư nợ theo thời gian</button>
+      <button class="tab" onclick="switchTab('breakdown')" id="tabBreakdown">Gốc vs Lãi theo năm</button>
+      <button class="tab" onclick="switchTab('cashflow')" id="tabCashflow">Dòng tiền hàng tháng</button>
+    </div>
+    <div class="legend-row" id="legendArea"></div>
+    <div class="chart-wrap"><canvas id="mainChart" role="img" aria-label="Biểu đồ tài chính vay mua nhà"></canvas></div>
+  </div>
+
+  <!-- GLOSSARY -->
+  <section class="glossary" aria-label="Giải thích các chỉ số và nghiên cứu quốc tế">
+    <h2>Nghiên cứu & Công thức quốc tế</h2>
+    <p class="gl-sub">Các chỉ số trong công cụ này được xây dựng dựa trên 5 nghiên cứu và tiêu chuẩn quốc tế được công nhận rộng rãi.</p>
+    <div class="glossary-grid">
+
+      <div class="gcard">
+        <div class="gcard-title"><span class="gbadge green">Harvard JCHS</span>Residual Income Method</div>
+        <p>Phương pháp của Harvard Joint Center for Housing Studies: trừ đi toàn bộ chi phí sinh hoạt thiết yếu trước, phần còn lại mới dùng để trả nhà. Chính xác hơn quy tắc 30% vì phản ánh thực tế chi tiêu theo từng người.</p>
+        <div class="formula">
+          Residual = Lương thực nhận − Chi tiêu thiết yếu − PMT<br>
+          Nếu Residual &lt; 0 → "Shelter Poor"
         </div>
-
-        <div class="gcard">
-          <div class="gcard-title"><span class="gbadge green">LTV</span>Loan-to-Value Ratio</div>
-          <p>Tỷ lệ vay so với giá trị tài sản — cho biết bạn vay bao nhiêu phần trăm giá trị căn nhà. LTV cao nghĩa là vốn tự có thấp, rủi ro cao hơn cho ngân hàng.</p>
-          <div class="formula">LTV (%) = Số tiền vay ÷ Giá trị nhà × 100</div>
-          <div class="thresholds">
-            <table>
-              <tr><td>≤ 60%</td><td class="ok">Tốt — dễ duyệt</td></tr>
-              <tr><td>61–70%</td><td class="ok">Chấp nhận được</td></tr>
-              <tr><td>71–80%</td><td class="warn">Giới hạn ngân hàng</td></tr>
-              <tr><td>&gt; 80%</td><td class="danger">Khó được duyệt</td></tr>
-            </table>
-          </div>
+        <div class="thresholds">
+          <table>
+            <tr><td>Residual ≥ 20% lương</td><td class="ok">Thoải mái</td></tr>
+            <tr><td>Residual 0–20% lương</td><td class="warn">Chấp nhận được</td></tr>
+            <tr><td>Residual &lt; 0</td><td class="danger">Shelter Poor</td></tr>
+          </table>
         </div>
+        <div class="source">Nguồn: JCHS Harvard — "Measuring Housing Affordability: Assessing the 30% of Income Standard"</div>
+      </div>
 
-        <div class="gcard">
-          <div class="gcard-title"><span class="gbadge amber">PMT</span>Tiền trả hàng tháng</div>
-          <p>Số tiền trả đều hàng tháng theo phương pháp dư nợ giảm dần (equal payment). Bao gồm cả gốc lẫn lãi, tính theo lãi suất cố định trong suốt kỳ hạn.</p>
-          <div class="formula">PMT = P × r × (1+r)ⁿ ÷ [(1+r)ⁿ − 1]</div>
-          <p style="font-size:12px;color:#aaa;margin-top:6px">P = vốn vay · r = lãi tháng = lãi năm ÷ 12 · n = số tháng</p>
+      <div class="gcard">
+        <div class="gcard-title"><span class="gbadge blue">US Lenders</span>Quy tắc 28/36</div>
+        <p>Tiêu chuẩn được các ngân hàng Mỹ và nhiều nước dùng để xét duyệt vay. Front-end ratio: chi phí nhà ≤28% thu nhập gộp. Back-end ratio: tổng tất cả nợ ≤36% thu nhập gộp.</p>
+        <div class="formula">
+          Front-end = PMT ÷ Thu nhập gộp × 100 ≤ 28%<br>
+          Back-end  = Tổng nợ ÷ Thu nhập gộp × 100 ≤ 36%
         </div>
-
-        <div class="gcard">
-          <div class="gcard-title"><span class="gbadge purple">Risk Score</span>Điểm rủi ro</div>
-          <p>Chỉ số tổng hợp 0–100 đánh giá mức độ rủi ro tài chính khi vay mua nhà, tính từ 4 thành phần có trọng số khác nhau.</p>
-          <div class="formula">Risk = DTI×35% + LTV×30% + Quỹ KCấp×20% + Kỳhạn×15%</div>
-          <div class="thresholds">
-            <table>
-              <tr><td>0–20</td><td class="ok">Rất thấp</td></tr>
-              <tr><td>21–40</td><td class="ok">Thấp</td></tr>
-              <tr><td>41–60</td><td class="warn">Trung bình</td></tr>
-              <tr><td>61–80</td><td class="warn">Cao</td></tr>
-              <tr><td>81–100</td><td class="danger">Rất cao</td></tr>
-            </table>
-          </div>
+        <div class="thresholds">
+          <table>
+            <tr><td>DTI ≤ 28%</td><td class="ok">Lý tưởng (front-end)</td></tr>
+            <tr><td>DTI ≤ 36%</td><td class="ok">An toàn (back-end)</td></tr>
+            <tr><td>DTI ≤ 43%</td><td class="warn">FHA loan limit</td></tr>
+            <tr><td>DTI &gt; 50%</td><td class="danger">Vượt ngưỡng</td></tr>
+          </table>
         </div>
+        <div class="source">Nguồn: Fannie Mae, FHA Guidelines, Chase Mortgage Research</div>
+      </div>
 
-        <div class="gcard">
-          <div class="gcard-title"><span class="gbadge green">Vốn tự có</span>Down Payment</div>
-          <p>Số tiền bạn tự có trước khi vay ngân hàng. Vốn tự có càng cao, LTV càng thấp, lãi suất được ưu đãi hơn và khả năng duyệt vay cao hơn.</p>
-          <div class="formula">Vốn tự có tối thiểu = Giá nhà × 20–30%</div>
-          <div class="thresholds">
-            <table>
-              <tr><td>≥ 40% giá nhà</td><td class="ok">Lý tưởng</td></tr>
-              <tr><td>30% giá nhà</td><td class="ok">Chuẩn ngân hàng</td></tr>
-              <tr><td>20% giá nhà</td><td class="warn">Tối thiểu</td></tr>
-              <tr><td>&lt; 20%</td><td class="danger">Rất khó duyệt</td></tr>
-            </table>
-          </div>
+      <div class="gcard">
+        <div class="gcard-title"><span class="gbadge amber">OECD</span>30% Housing Cost Standard</div>
+        <p>Tiêu chuẩn OECD: hộ gia đình được coi là "housing cost-burdened" khi chi trên 30% thu nhập khả dụng cho nhà ở. Đây là ngưỡng được dùng trong chính sách nhà ở của hầu hết các nước phát triển.</p>
+        <div class="formula">
+          Housing Burden (%) = PMT ÷ Thu nhập thực nhận × 100<br>
+          Cost-Burdened nếu ≥ 30%<br>
+          Severely Burdened nếu ≥ 50%
         </div>
-
-        <div class="gcard">
-          <div class="gcard-title"><span class="gbadge amber">Quỹ KCấp</span>Emergency Fund</div>
-          <p>Khoản tiền dự phòng tách biệt với vốn tự có — dùng khi mất việc, bệnh viện, sửa nhà đột xuất. Không được dùng để trả góp hay đặt cọc.</p>
-          <div class="formula">Quỹ khẩn cấp = Thu nhập × Số tháng dự phòng</div>
-          <div class="thresholds">
-            <table>
-              <tr><td>≥ 6 tháng</td><td class="ok">An toàn cao</td></tr>
-              <tr><td>3–5 tháng</td><td class="ok">Chấp nhận được</td></tr>
-              <tr><td>1–2 tháng</td><td class="warn">Mỏng</td></tr>
-              <tr><td>0 tháng</td><td class="danger">Rủi ro cao</td></tr>
-            </table>
-          </div>
+        <div class="thresholds">
+          <table>
+            <tr><td>&lt; 30%</td><td class="ok">Không bị gánh nặng</td></tr>
+            <tr><td>30–50%</td><td class="warn">Cost-Burdened</td></tr>
+            <tr><td>≥ 50%</td><td class="danger">Severely Burdened</td></tr>
+          </table>
         </div>
+        <div class="source">Nguồn: OECD Affordable Housing Database — HC1.2 Housing Costs Over Income (2024)</div>
+      </div>
 
+      <div class="gcard">
+        <div class="gcard-title"><span class="gbadge purple">Demographia</span>Median Multiple</div>
+        <p>Chỉ số so sánh giá nhà với thu nhập năm — được Demographia dùng để đánh giá khả năng tiếp cận nhà ở tại 95 thị trường trên 8 quốc gia. Năm 2025: không thị trường nào đạt mức "Affordable" (≤3x).</p>
+        <div class="formula">
+          Median Multiple = Giá nhà ÷ Thu nhập năm (×12)<br>
+          Thu nhập năm = Lương thực nhận × 12
+        </div>
+        <div class="thresholds">
+          <table>
+            <tr><td>≤ 3.0x</td><td class="ok">Affordable</td></tr>
+            <tr><td>3.1–4.0x</td><td class="warn">Moderately Unaffordable</td></tr>
+            <tr><td>4.1–5.0x</td><td class="warn">Seriously Unaffordable</td></tr>
+            <tr><td>5.1–6.0x</td><td class="danger">Severely Unaffordable</td></tr>
+            <tr><td>&gt; 6.0x</td><td class="danger">Impossibly Unaffordable</td></tr>
+          </table>
+        </div>
+        <div class="source">Nguồn: Demographia International Housing Affordability 2025 Edition</div>
       </div>
-    </section>
 
-    <!-- FAQ -->
-    <section class="faq" aria-label="Câu hỏi thường gặp về vay mua nhà">
-      <h2>Câu hỏi thường gặp</h2>
+      <div class="gcard">
+        <div class="gcard-title"><span class="gbadge blue">DTI</span>Debt-to-Income Ratio</div>
+        <p>Tỷ lệ nợ so với thu nhập — chỉ số ngân hàng Việt Nam dùng chủ yếu để xét duyệt. Tính trên lương thực nhận (take-home pay), không phải lương gross như chuẩn Mỹ.</p>
+        <div class="formula">DTI (%) = Tiền trả hàng tháng ÷ Lương thực nhận × 100</div>
+        <div class="thresholds">
+          <table>
+            <tr><td>≤ 35%</td><td class="ok">Rất an toàn (VN)</td></tr>
+            <tr><td>36–40%</td><td class="ok">An toàn</td></tr>
+            <tr><td>41–50%</td><td class="warn">Căng thẳng</td></tr>
+            <tr><td>&gt; 50%</td><td class="danger">Vượt ngưỡng</td></tr>
+          </table>
+        </div>
+        <div class="source">Nguồn: Ngân hàng Nhà nước VN, Vietcombank, BIDV lending guidelines</div>
+      </div>
 
-      <div class="faq-item">
-        <div class="faq-q">Thu nhập bao nhiêu thì nên mua nhà?</div>
-        <div class="faq-a">Không có ngưỡng tuyệt đối — quan trọng là DTI ratio. Nguyên tắc: tiền trả hàng tháng không vượt quá 40% thu nhập và bạn cần có đủ vốn tự có tối thiểu 20–30% giá trị nhà. Ví dụ lương 20 triệu/tháng, tiền trả nên dưới 8 triệu/tháng.</div>
+      <div class="gcard">
+        <div class="gcard-title"><span class="gbadge red">LTV</span>Loan-to-Value Ratio</div>
+        <p>Tỷ lệ vay so với giá trị tài sản thế chấp. Quyết định mức rủi ro ngân hàng chấp nhận và lãi suất được áp dụng. LTV càng thấp → điều kiện vay càng thuận lợi.</p>
+        <div class="formula">LTV (%) = Số tiền vay ÷ Giá trị nhà × 100</div>
+        <div class="thresholds">
+          <table>
+            <tr><td>≤ 60%</td><td class="ok">Tốt nhất</td></tr>
+            <tr><td>61–70%</td><td class="ok">Chuẩn ngân hàng VN</td></tr>
+            <tr><td>71–80%</td><td class="warn">Giới hạn trên</td></tr>
+            <tr><td>&gt; 80%</td><td class="danger">Khó được duyệt</td></tr>
+          </table>
+        </div>
+        <div class="source">Nguồn: Thông tư 39/2016/TT-NHNN về hoạt động cho vay của TCTD</div>
       </div>
-      <div class="faq-item">
-        <div class="faq-q">Lãi suất vay mua nhà 2025 là bao nhiêu?</div>
-        <div class="faq-a">Thường có 2 giai đoạn: ưu đãi 1–3 năm đầu khoảng 7–8.5%/năm, sau đó thả nổi theo lãi suất thị trường thường 10–12%/năm. Công cụ này dùng lãi suất dài hạn để tính toán thực tế hơn.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Làm công ty nước ngoài có lợi thế gì khi vay không?</div>
-        <div class="faq-a">Có. Thu nhập minh bạch qua bảng lương và sao kê ngân hàng giúp ngân hàng dễ thẩm định hơn. Một số ngân hàng cho phép LTV lên tới 75–80% thay vì 70% như thông thường, và ít yêu cầu tài sản bảo đảm bổ sung hơn.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Nên vay 15 năm hay 20 năm?</div>
-        <div class="faq-a">Vay 15 năm tiết kiệm lãi đáng kể (có thể chênh hàng trăm triệu) nhưng tiền trả hàng tháng cao hơn ~20–25%. Vay 20 năm giảm gánh nặng hàng tháng, tạo dư địa tài chính. Nếu có thể vay 20 năm và dùng phần chênh lệch để đầu tư hoặc trả trước hạn linh hoạt, thường hiệu quả hơn.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Vốn tự có tối thiểu cần bao nhiêu?</div>
-        <div class="faq-a">Ngân hàng Việt Nam thường yêu cầu tối thiểu 20–30% giá trị nhà. Ngoài ra cần cộng thêm quỹ khẩn cấp (3–6 tháng lương), phí công chứng, thuế trước bạ (~1–2%), phí môi giới (1–2%) và chi phí sửa chữa ban đầu nếu có.</div>
-      </div>
-    </section>
-  </main>
 
-  <footer>
-    <p>Công cụ này chỉ mang tính tham khảo và không thay thế tư vấn tài chính chuyên nghiệp.</p>
-    <p>Lãi suất, chính sách vay có thể thay đổi theo từng ngân hàng và thời điểm. Vui lòng liên hệ ngân hàng để được tư vấn chính xác.</p>
-    <p style="margin-top:8px">© 2025 · Máy tính vay mua nhà miễn phí</p>
-  </footer>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" aria-label="Câu hỏi thường gặp về vay mua nhà">
+    <h2>Câu hỏi thường gặp</h2>
+    <div class="faq-item">
+      <div class="faq-q">Residual Income Method khác gì quy tắc 30%?</div>
+      <div class="faq-a">Quy tắc 30% (OECD) chỉ nhìn vào tỷ lệ: nếu tiền trả nhà &lt;30% thu nhập là ổn — không quan tâm bạn còn lại bao nhiêu sau chi tiêu. Residual Income (Harvard JCHS) tinh vi hơn: trừ hết chi phí sinh hoạt thực tế trước, phần còn lại mới dùng để trả nhà. Người thu nhập cao dùng 30% vẫn thừa tiền; người thu nhập thấp dùng 25% nhưng sau chi tiêu không còn gì — 30% Rule bỏ sót trường hợp thứ hai.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Median Multiple của Việt Nam ở mức nào?</div>
+      <div class="faq-a">Hà Nội và TP.HCM hiện ở mức 20–30x (giá nhà 2–4 tỷ, thu nhập trung bình ~120–180 triệu/năm) — thuộc nhóm "Impossibly Unaffordable" theo thang đo Demographia. Đây là lý do vốn tự có và hỗ trợ gia đình đóng vai trò quan trọng hơn nhiều so với các nước phát triển.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Lương thực nhận khác lương gross như thế nào?</div>
+      <div class="faq-a">Lương gross là lương trước khi trừ thuế TNCN và BHXH. Lương thực nhận (take-home pay / net income) là số tiền thực tế vào tài khoản sau khi đã trừ. Công cụ này dùng lương thực nhận vì đó là tiền bạn thực sự có để chi tiêu và trả nợ — phù hợp hơn với cách các ngân hàng Việt Nam thẩm định hồ sơ thực tế.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">"Số tiền phải tiêu" nên ước tính bao nhiêu?</div>
+      <div class="faq-a">Bao gồm: ăn uống, đi lại, điện nước internet, điện thoại, bảo hiểm y tế, và các chi phí cố định không thể cắt. Không tính tiền tiết kiệm hay giải trí. Với một người đi làm tại Hà Nội/HCM, con số tối thiểu thực tế thường từ 6–10 triệu/tháng tùy lối sống.</div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>Dựa trên nghiên cứu: Harvard JCHS · OECD Affordable Housing Database 2024 · Demographia International 2025 · Fannie Mae/FHA Guidelines</p>
+  <p>Công cụ này chỉ mang tính tham khảo và không thay thế tư vấn tài chính chuyên nghiệp.</p>
+  <p style="margin-top:6px">© 2025 · Máy tính vay mua nhà miễn phí</p>
+</footer>
 </div>
 
 <script>
@@ -333,31 +385,40 @@
   var chartInst = null;
 
   function pmt(r, n, pv) {
-    if (r === 0 || pv === 0) return n > 0 ? pv / n : 0;
+    if (pv === 0 || n === 0) return 0;
+    if (r === 0) return pv / n;
     return pv * r * Math.pow(1+r,n) / (Math.pow(1+r,n) - 1);
   }
   function fmtTr(v) {
     if (Math.abs(v) >= 1000) return (v/1000).toFixed(2) + ' tỷ';
-    return Math.round(v) + ' tr';
+    return (Math.round(v * 10) / 10).toFixed(1) + ' tr';
   }
   function fmtM(v) { return v.toFixed(1) + ' tr'; }
 
-  function calcRisk(dti, ltv, emergencyMonths, termYears) {
+  function calcRisk(dti, ltv, residualPct, emg, years) {
     var components = [];
-    var dtiScore = dti <= 30 ? 5 : dti <= 40 ? 15 : dti <= 50 ? 35 : dti <= 60 ? 60 : 85;
-    components.push({ name: 'DTI ratio ('+dti.toFixed(1)+'%)', score: dtiScore, weight: 0.35, formula: 'DTI = Trả/tháng ÷ Thu nhập × 100' });
+    var dtiScore = dti <= 28 ? 5 : dti <= 35 ? 12 : dti <= 40 ? 22 : dti <= 50 ? 40 : dti <= 60 ? 65 : 90;
+    components.push({ name: 'DTI ratio ('+dti.toFixed(1)+'%)', score: dtiScore, weight: 0.30, formula: 'PMT ÷ Lương thực nhận × 100' });
+
+    var residualScore = residualPct >= 20 ? 5 : residualPct >= 10 ? 15 : residualPct >= 0 ? 35 : residualPct >= -10 ? 65 : 90;
+    components.push({ name: 'Residual Income ('+residualPct.toFixed(0)+'%)', score: residualScore, weight: 0.30, formula: '(Lương − Chi tiêu − PMT) ÷ Lương × 100' });
+
     var ltvScore = ltv <= 50 ? 5 : ltv <= 60 ? 10 : ltv <= 70 ? 20 : ltv <= 80 ? 40 : ltv <= 90 ? 65 : 90;
-    components.push({ name: 'LTV ratio ('+ltv.toFixed(1)+'%)', score: ltvScore, weight: 0.30, formula: 'LTV = Số vay ÷ Giá trị nhà × 100' });
-    var emgScore = emergencyMonths >= 6 ? 5 : emergencyMonths >= 3 ? 20 : emergencyMonths >= 1 ? 45 : 75;
-    components.push({ name: 'Quỹ khẩn cấp ('+emergencyMonths+' tháng)', score: emgScore, weight: 0.20, formula: 'Tối thiểu 3 tháng; lý tưởng 6 tháng' });
-    var termScore = termYears <= 10 ? 10 : termYears <= 15 ? 15 : termYears <= 20 ? 25 : termYears <= 25 ? 40 : 55;
-    components.push({ name: 'Kỳ hạn ('+termYears+' năm)', score: termScore, weight: 0.15, formula: 'Kỳ hạn dài = lãi tổng cao, rủi ro lãi suất lớn' });
+    components.push({ name: 'LTV ratio ('+ltv.toFixed(1)+'%)', score: ltvScore, weight: 0.20, formula: 'Số vay ÷ Giá trị nhà × 100' });
+
+    var emgScore = emg >= 6 ? 5 : emg >= 3 ? 20 : emg >= 1 ? 45 : 75;
+    components.push({ name: 'Quỹ khẩn cấp ('+emg+' tháng)', score: emgScore, weight: 0.12, formula: 'Tối thiểu 3 tháng lương' });
+
+    var termScore = years <= 10 ? 8 : years <= 15 ? 12 : years <= 20 ? 22 : years <= 25 ? 38 : 52;
+    components.push({ name: 'Kỳ hạn ('+years+' năm)', score: termScore, weight: 0.08, formula: 'Kỳ hạn dài = rủi ro lãi suất cao hơn' });
+
     var total = components.reduce(function(s,c){ return s + c.score * c.weight; }, 0);
     return { score: Math.round(total), components: components };
   }
 
   function calc() {
     var income   = parseFloat(document.getElementById('income').value);
+    var expenses = parseFloat(document.getElementById('expenses').value);
     var equity   = parseFloat(document.getElementById('equity').value);
     var loan     = parseFloat(document.getElementById('loanAmt').value);
     var years    = parseInt(document.getElementById('term').value);
@@ -373,142 +434,208 @@
     var totalInt  = totalPaid - loan;
     var emgCost   = income * emg;
 
-    document.getElementById('incomeVal').textContent  = income.toFixed(0) + ' tr';
-    document.getElementById('equityVal').textContent  = equity >= 1000 ? (equity/1000).toFixed(2)+' tỷ' : equity+' tr';
-    document.getElementById('loanAmtVal').textContent = loan >= 1000 ? (loan/1000).toFixed(2)+' tỷ' : loan+' tr';
-    document.getElementById('termVal').textContent    = years + ' năm';
-    document.getElementById('rateVal').textContent    = (aRate*100).toFixed(1) + '%';
+    // Residual Income
+    var residual     = income - expenses - monthly;
+    var residualPct  = income > 0 ? residual / income * 100 : 0;
+
+    // Median Multiple
+    var annualIncome = income * 12;
+    var medianMult   = annualIncome > 0 ? houseVal / annualIncome : 0;
+
+    // OECD burden
+    var oecdBurden = income > 0 ? monthly / income * 100 : 0;
+
+    document.getElementById('incomeVal').textContent   = income.toFixed(0) + ' tr';
+    document.getElementById('expensesVal').textContent = expenses.toFixed(1) + ' tr';
+    document.getElementById('equityVal').textContent   = equity >= 1000 ? (equity/1000).toFixed(2)+' tỷ' : equity+' tr';
+    document.getElementById('loanAmtVal').textContent  = loan >= 1000 ? (loan/1000).toFixed(2)+' tỷ' : loan+' tr';
+    document.getElementById('termVal').textContent     = years + ' năm';
+    document.getElementById('rateVal').textContent     = (aRate*100).toFixed(1) + '%';
     document.getElementById('emergencyVal').textContent = emg + ' tháng';
 
-    var cls  = dti <= 40 ? 'ok' : dti <= 50 ? 'warn' : 'danger';
+    // Residual box
+    var resCls = residual >= 0 ? (residualPct >= 20 ? 'positive' : 'neutral') : 'negative';
+    var resColor = residual >= 0 ? (residualPct >= 20 ? '#0F6E56' : '#854F0B') : '#A32D2D';
+    document.getElementById('residualBox').innerHTML =
+      '<div class="res-card '+resCls+'">'+
+        '<div class="res-label">Tiền còn lại sau tất cả (Residual)</div>'+
+        '<div class="res-val" style="color:'+resColor+'">'+(income > 0 ? fmtM(residual) : '—')+'</div>'+
+        '<div style="font-size:11px;color:#888;margin-top:4px">= '+income.toFixed(1)+' − '+expenses.toFixed(1)+' − '+fmtM(monthly)+'</div>'+
+      '</div>'+
+      '<div class="res-card '+(residualPct>=20?'positive':residualPct>=0?'neutral':'negative')+'">'+
+        '<div class="res-label">Residual / Lương (%)</div>'+
+        '<div class="res-val" style="color:'+resColor+'">'+(income > 0 ? residualPct.toFixed(1)+'%' : '—')+'</div>'+
+        '<div style="font-size:11px;color:#888;margin-top:4px">'+(residualPct>=20?'Thoải mái ✓':residualPct>=0?'Chấp nhận được':'Shelter Poor ✗')+'</div>'+
+      '</div>';
+
+    var ra = document.getElementById('residualAlert');
+    if (income === 0) ra.innerHTML = '<div class="alrt warn">Nhập lương thực nhận để xem kết quả.</div>';
+    else if (residual < 0) ra.innerHTML = '<div class="alrt danger">⚠ Residual âm: thu nhập không đủ để vừa chi tiêu vừa trả nợ. Theo Harvard JCHS, đây là trạng thái "Shelter Poor" — cần giảm khoản vay hoặc tăng thu nhập.</div>';
+    else if (residualPct < 10) ra.innerHTML = '<div class="alrt warn">Residual dưới 10%: rất mỏng, không có đệm tài chính khi phát sinh sự cố.</div>';
+    else ra.innerHTML = '<div class="alrt ok">Residual '+residualPct.toFixed(1)+'% — Còn dư địa tài chính sau khi trả nợ và chi tiêu.</div>';
+
+    // Main metrics
+    var cls  = dti <= 35 ? 'ok' : dti <= 45 ? 'warn' : 'danger';
     var lcls = ltv <= 70 ? 'ok' : ltv <= 80 ? 'warn' : 'danger';
+    var mmCls = medianMult <= 4 ? 'ok' : medianMult <= 6 ? 'warn' : 'danger';
+    var oecdCls = oecdBurden < 30 ? 'ok' : oecdBurden < 50 ? 'warn' : 'danger';
     document.getElementById('mainMetrics').innerHTML =
-      '<div class="metric"><div class="mlabel">Trả hàng tháng</div><div class="mval '+cls+'">'+(income>0?fmtM(monthly):'—')+'</div></div>'+
-      '<div class="metric"><div class="mlabel">DTI ratio</div><div class="mval '+cls+'">'+(income>0?dti.toFixed(1)+'%':'—')+'</div></div>'+
-      '<div class="metric"><div class="mlabel">LTV ratio</div><div class="mval '+lcls+'">'+(houseVal>0?ltv.toFixed(1)+'%':'—')+'</div></div>'+
-      '<div class="metric"><div class="mlabel">Tổng lãi phải trả</div><div class="mval">'+(loan>0?fmtTr(totalInt):'—')+'</div></div>'+
-      '<div class="metric"><div class="mlabel">Tổng tiền trả</div><div class="mval">'+(loan>0?fmtTr(totalPaid):'—')+'</div></div>'+
-      '<div class="metric"><div class="mlabel">Quỹ khẩn cấp cần</div><div class="mval '+(emg>=3?'ok':'warn')+'">'+fmtTr(emgCost)+'</div></div>';
+      '<div class="metric"><div class="mlabel">Trả hàng tháng</div><div class="mval '+ cls +'">'+(loan>0?fmtM(monthly):'—')+'</div></div>'+
+      '<div class="metric"><div class="mlabel">DTI ratio</div><div class="mval '+ cls +'">'+(income>0?dti.toFixed(1)+'%':'—')+'</div></div>'+
+      '<div class="metric"><div class="mlabel">LTV ratio</div><div class="mval '+ lcls +'">'+(houseVal>0?ltv.toFixed(1)+'%':'—')+'</div></div>'+
+      '<div class="metric"><div class="mlabel">OECD Burden</div><div class="mval '+ oecdCls +'">'+(income>0?oecdBurden.toFixed(1)+'%':'—')+'</div></div>'+
+      '<div class="metric"><div class="mlabel">Median Multiple</div><div class="mval '+ mmCls +'">'+(annualIncome>0?medianMult.toFixed(1)+'x':'—')+'</div></div>'+
+      '<div class="metric"><div class="mlabel">Tổng lãi phải trả</div><div class="mval">'+(loan>0?fmtTr(totalInt):'—')+'</div></div>';
 
     var fill = document.getElementById('dtiFill');
-    fill.style.width = Math.min(income>0?dti:0, 100) + '%';
-    fill.style.background = dti<=40?'#1D9E75':dti<=50?'#BA7517':'#E24B4A';
+    fill.style.width = Math.min(income>0?dti:0, 100)+'%';
+    fill.style.background = dti<=30?'#1D9E75': dti<=40?'#70B869': dti<=50?'#BA7517':'#E24B4A';
 
     var ab = document.getElementById('alertBox');
-    if (income === 0) { ab.innerHTML = '<div class="alrt warn">Nhập thu nhập để xem đánh giá DTI.</div>'; }
-    else if (dti <= 35) ab.innerHTML = '<div class="alrt ok">DTI '+dti.toFixed(1)+'% — Rất an toàn. Ngân hàng duyệt dễ, còn dư địa đầu tư thêm.</div>';
-    else if (dti <= 45) ab.innerHTML = '<div class="alrt ok">DTI '+dti.toFixed(1)+'% — Chấp nhận được. Nên đảm bảo quỹ khẩn cấp ≥ 3 tháng trước khi ký.</div>';
-    else if (dti <= 50) ab.innerHTML = '<div class="alrt warn">DTI '+dti.toFixed(1)+'% — Căng thẳng. Ngân hàng có thể yêu cầu tài sản bảo đảm bổ sung.</div>';
-    else ab.innerHTML = '<div class="alrt danger">DTI '+dti.toFixed(1)+'% — Vượt ngưỡng. Giảm số vay hoặc tăng vốn tự có.</div>';
+    if (income===0) { ab.innerHTML=''; }
+    else if (dti<=30) ab.innerHTML='<div class="alrt ok">DTI '+dti.toFixed(1)+'% — Rất an toàn. Đạt chuẩn 28/36 Rule của Mỹ.</div>';
+    else if (dti<=40) ab.innerHTML='<div class="alrt ok">DTI '+dti.toFixed(1)+'% — An toàn. Ngân hàng VN thường duyệt tốt ở mức này.</div>';
+    else if (dti<=50) ab.innerHTML='<div class="alrt warn">DTI '+dti.toFixed(1)+'% — Căng thẳng. Cần quỹ khẩn cấp vững chắc trước khi vay.</div>';
+    else ab.innerHTML='<div class="alrt danger">DTI '+dti.toFixed(1)+'% — Vượt ngưỡng. Giảm khoản vay hoặc kéo dài kỳ hạn.</div>';
 
-    var risk = calcRisk(income>0?dti:0, houseVal>0?ltv:0, emg, years);
+    // Risk
+    var risk = calcRisk(income>0?dti:0, houseVal>0?ltv:0, income>0?residualPct:0, emg, years);
     document.getElementById('riskScore').textContent = risk.score;
     var rl = document.getElementById('riskLabel');
-    if      (risk.score<=20){ rl.textContent='Rất thấp';   rl.style.cssText='background:#E1F5EE;color:#085041;font-size:13px;font-weight:500;padding:4px 12px;border-radius:12px'; }
-    else if (risk.score<=40){ rl.textContent='Thấp';       rl.style.cssText='background:#EAF3DE;color:#27500A;font-size:13px;font-weight:500;padding:4px 12px;border-radius:12px'; }
-    else if (risk.score<=60){ rl.textContent='Trung bình'; rl.style.cssText='background:#FAEEDA;color:#633806;font-size:13px;font-weight:500;padding:4px 12px;border-radius:12px'; }
-    else if (risk.score<=80){ rl.textContent='Cao';        rl.style.cssText='background:#FAECE7;color:#4A1B0C;font-size:13px;font-weight:500;padding:4px 12px;border-radius:12px'; }
-    else                    { rl.textContent='Rất cao';    rl.style.cssText='background:#FCEBEB;color:#501313;font-size:13px;font-weight:500;padding:4px 12px;border-radius:12px'; }
+    var rstyles = [
+      [20,'Rất thấp','#E1F5EE','#085041'],
+      [40,'Thấp','#EAF3DE','#27500A'],
+      [60,'Trung bình','#FAEEDA','#633806'],
+      [80,'Cao','#FAECE7','#4A1B0C'],
+      [101,'Rất cao','#FCEBEB','#501313']
+    ];
+    for (var i=0;i<rstyles.length;i++) {
+      if (risk.score <= rstyles[i][0]) {
+        rl.textContent = rstyles[i][1];
+        rl.style.cssText = 'background:'+rstyles[i][2]+';color:'+rstyles[i][3]+';font-size:13px;font-weight:500;padding:4px 12px;border-radius:12px';
+        break;
+      }
+    }
 
     var gc = ['#1D9E75','#5DCAA5','#EF9F27','#D85A30','#E24B4A'];
     document.getElementById('riskGauge').innerHTML = gc.map(function(c,i){
-      var active = risk.score >= i*20 && (i===4 ? risk.score<=100 : risk.score < (i+1)*20);
-      return '<div class="risk-seg" style="background:'+c+';opacity:'+(active?1:0.18)+'"></div>';
+      var active = risk.score >= i*20 && (i===4 ? true : risk.score < (i+1)*20);
+      return '<div class="risk-seg" style="background:'+c+';opacity:'+(active?1:0.15)+'"></div>';
     }).join('');
 
-    var fHTML = '<div style="font-size:13px;font-weight:500;margin-bottom:8px">Công thức tính Risk Score</div>'+
-      '<div style="font-size:12px;color:#888;margin-bottom:8px">Risk Score = Σ ( điểm thành phần × trọng số )</div>';
+    var fHTML = '<div style="font-size:13px;font-weight:500;margin-bottom:8px">Công thức Risk Score</div>'+
+      '<div style="font-size:12px;color:#888;margin-bottom:8px">Risk = Σ (điểm thành phần × trọng số) — tích hợp Residual Income vào thành phần 2</div>';
     risk.components.forEach(function(c){
-      fHTML += '<div class="frow"><span class="fname">'+c.name+'</span><code>'+c.score+' × '+c.weight+' = '+(c.score*c.weight).toFixed(1)+'</code><span style="font-size:11px;color:#bbb;margin-left:6px">'+c.formula+'</span></div>';
+      fHTML += '<div class="frow"><span class="fname">'+c.name+'</span><code>'+c.score+' × '+c.weight+' = '+(c.score*c.weight).toFixed(2)+'</code><span style="font-size:11px;color:#bbb;margin-left:6px">'+c.formula+'</span></div>';
     });
     fHTML += '<div style="margin-top:8px;padding-top:8px;border-top:1px solid #e5e5e2">'+
       '<div class="frow"><span class="fname" style="font-weight:500">Tổng Risk Score</span><code style="font-size:14px">'+risk.score+' / 100</code></div>'+
-      '<div style="font-size:11px;color:#bbb;margin-top:5px">Ngưỡng: 0–20 Rất thấp · 21–40 Thấp · 41–60 Trung bình · 61–80 Cao · 81–100 Rất cao</div>'+
-      '</div>';
+      '<div style="font-size:11px;color:#bbb;margin-top:5px">0–20 Rất thấp · 21–40 Thấp · 41–60 Trung bình · 61–80 Cao · 81–100 Rất cao</div></div>';
     document.getElementById('formulaBox').innerHTML = fHTML;
 
     document.getElementById('houseBreakdown').innerHTML =
       '<div class="metric"><div class="mlabel">Giá trị nhà mua được</div><div class="mval">'+(houseVal>0?fmtTr(houseVal):'—')+'</div></div>'+
       '<div class="metric"><div class="mlabel">Vốn tự có</div><div class="mval ok">'+fmtTr(equity)+' ('+(houseVal>0?(equity/houseVal*100).toFixed(0):0)+'%)</div></div>'+
       '<div class="metric"><div class="mlabel">Số tiền vay</div><div class="mval">'+fmtTr(loan)+' ('+(houseVal>0?ltv.toFixed(0):0)+'%)</div></div>'+
-      '<div class="metric"><div class="mlabel">LTV ratio</div><div class="mval '+lcls+'">'+(houseVal>0?ltv.toFixed(1)+'%':'—')+'<span style="font-size:11px;font-weight:400;color:#aaa"> (ngân hàng max ~80%)</span></div></div>';
+      '<div class="metric"><div class="mlabel">Median Multiple</div><div class="mval '+(mmCls)+'">'+(annualIncome>0?medianMult.toFixed(1)+'x':'—')+'<span style="font-size:11px;font-weight:400;color:#aaa"> (Demographia)</span></div></div>';
 
-    calcScenarios(income, aRate);
-    updateChart(loan, mr, n, monthly);
+    calcScenarios(income, expenses, aRate);
+    updateChart(loan, mr, n, monthly, income, expenses);
   }
 
-  function calcScenarios(income, aRate) {
+  function calcScenarios(income, expenses, aRate) {
     var mr = aRate / 12;
     var dtiTargets = [
-      { dti: 0.35, years: 15, label: 'An toàn', color: '#0F6E56', feat: false },
-      { dti: 0.43, years: 20, label: 'Cân bằng ★', color: '#185FA5', feat: true },
-      { dti: 0.48, years: 25, label: 'Tối đa', color: '#854F0B', feat: false }
+      { dtiTarget: 0.30, years: 15, label: 'An toàn', color: '#0F6E56', feat: false },
+      { dtiTarget: 0.40, years: 20, label: 'Cân bằng ★', color: '#185FA5', feat: true },
+      { dtiTarget: 0.45, years: 25, label: 'Tối đa', color: '#854F0B', feat: false }
     ];
     document.getElementById('scenarios').innerHTML = dtiTargets.map(function(sc){
       var n2 = sc.years * 12;
-      var maxMonthly = income * sc.dti;
+      var maxMonthly = income * sc.dtiTarget;
       var maxLoan = mr > 0 ? maxMonthly * (Math.pow(1+mr,n2)-1) / (mr * Math.pow(1+mr,n2)) : maxMonthly * n2;
-      maxLoan = Math.round(maxLoan / 50) * 50;
+      maxLoan = Math.max(0, Math.round(maxLoan / 50) * 50);
       var m = pmt(mr, n2, maxLoan);
       var d = income > 0 ? m / income * 100 : 0;
-      var dc = d <= 40 ? '#0F6E56' : d <= 50 ? '#854F0B' : '#A32D2D';
+      var res = income - expenses - m;
+      var resPct = income > 0 ? res / income * 100 : 0;
+      var dc = d <= 35 ? '#0F6E56' : d <= 45 ? '#854F0B' : '#A32D2D';
+      var rc = res >= 0 ? (resPct >= 20 ? '#0F6E56' : '#854F0B') : '#A32D2D';
       return '<div class="sc'+(sc.feat?' feat':'')+'">'+
         '<div class="sc-title" style="color:'+sc.color+'">'+sc.label+'</div>'+
-        '<div class="scr"><span>Vay tối đa</span><span>'+fmtTr(maxLoan)+'</span></div>'+
+        '<div class="scr"><span>Vay tối đa</span><span>'+(income>0?fmtTr(maxLoan):'—')+'</span></div>'+
         '<div class="scr"><span>Kỳ hạn</span><span>'+sc.years+' năm</span></div>'+
-        '<div class="scr"><span>Trả / tháng</span><span>'+fmtM(m)+'</span></div>'+
-        '<div class="scr"><span>DTI</span><span style="color:'+dc+'">'+d.toFixed(1)+'%</span></div>'+
+        '<div class="scr"><span>Trả / tháng</span><span>'+(income>0?fmtM(m):'—')+'</span></div>'+
+        '<div class="scr"><span>DTI</span><span style="color:'+dc+'">'+(income>0?d.toFixed(1)+'%':'—')+'</span></div>'+
+        '<div class="scr"><span>Residual</span><span style="color:'+rc+'">'+(income>0?fmtM(res):'—')+'</span></div>'+
         '</div>';
     }).join('');
   }
 
-  function updateChart(loan, mr, n, monthly) {
-    if (chartInst) { chartInst.destroy(); }
+  function updateChart(loan, mr, n, monthly, income, expenses) {
+    if (chartInst) { chartInst.destroy(); chartInst = null; }
+    if (loan === 0 || n === 0) { document.getElementById('legendArea').innerHTML=''; return; }
     var ctx = document.getElementById('mainChart').getContext('2d');
-    if (loan === 0 || n === 0) {
-      document.getElementById('legendArea').innerHTML = '';
-      chartInst = null; return;
-    }
+
     if (currentTab === 'balance') {
       document.getElementById('legendArea').innerHTML = '<span><span class="ldot" style="background:#185FA5"></span>Dư nợ còn lại</span>';
-      var labels = [], balances = [], bal = loan;
-      for (var i = 0; i <= n; i++) {
-        if (i % 12 === 0) { labels.push('Năm '+(i/12)); balances.push(Math.round(bal)); }
-        var interest = bal * mr;
-        bal = Math.max(0, bal - (monthly - interest));
+      var labels=[], balances=[], bal=loan;
+      for (var i=0;i<=n;i++) {
+        if (i%12===0) { labels.push('Năm '+(i/12)); balances.push(Math.round(bal)); }
+        var interest=bal*mr; bal=Math.max(0, bal-(monthly-interest));
       }
       chartInst = new Chart(ctx, {
-        type: 'line',
-        data: { labels: labels, datasets: [{ label: 'Dư nợ (tr)', data: balances, borderColor: '#185FA5', backgroundColor: 'rgba(24,95,165,0.08)', fill: true, tension: 0.3, pointRadius: 2 }] },
-        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { ticks: { callback: function(v){ return v>=1000?(v/1000).toFixed(1)+'tỷ':v+'tr'; } } } } }
+        type:'line', data:{ labels:labels, datasets:[{ label:'Dư nợ', data:balances, borderColor:'#185FA5', backgroundColor:'rgba(24,95,165,0.08)', fill:true, tension:0.3, pointRadius:2 }] },
+        options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false} }, scales:{ y:{ ticks:{ callback:function(v){ return v>=1000?(v/1000).toFixed(1)+'tỷ':v+'tr'; } } } } }
       });
-    } else {
+
+    } else if (currentTab === 'breakdown') {
       document.getElementById('legendArea').innerHTML = '<span><span class="ldot" style="background:#1D9E75"></span>Gốc</span><span><span class="ldot" style="background:#F0997B"></span>Lãi</span>';
-      var yLabels=[], pData=[], iData=[], bal2=loan;
+      var yL=[], pD=[], iD=[], bal2=loan;
       for (var yr=1; yr<=Math.ceil(n/12); yr++) {
-        var yP=0, yI=0;
-        for (var m=0; m<12 && bal2>0; m++) {
+        var yP=0,yI=0;
+        for (var m2=0; m2<12&&bal2>0; m2++) {
           var int2=bal2*mr, prin=monthly-int2;
           yI+=int2; yP+=Math.min(prin,bal2); bal2=Math.max(0,bal2-prin);
         }
-        if (yr%5===1 || yr===Math.ceil(n/12)) { yLabels.push('Năm '+yr); pData.push(Math.round(yP)); iData.push(Math.round(yI)); }
+        if (yr%5===1||yr===Math.ceil(n/12)) { yL.push('Năm '+yr); pD.push(Math.round(yP)); iD.push(Math.round(yI)); }
       }
       chartInst = new Chart(ctx, {
-        type: 'bar',
-        data: { labels: yLabels, datasets: [{ label: 'Gốc', data: pData, backgroundColor: '#1D9E75' },{ label: 'Lãi', data: iData, backgroundColor: '#F0997B' }] },
-        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { stacked: true }, y: { stacked: true, ticks: { callback: function(v){ return v+'tr'; } } } } }
+        type:'bar', data:{ labels:yL, datasets:[{label:'Gốc',data:pD,backgroundColor:'#1D9E75'},{label:'Lãi',data:iD,backgroundColor:'#F0997B'}] },
+        options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{stacked:true},y:{stacked:true, ticks:{callback:function(v){return v+'tr';}}}} }
+      });
+
+    } else {
+      // cashflow chart
+      document.getElementById('legendArea').innerHTML = '<span><span class="ldot" style="background:#1D9E75"></span>Tiền còn lại</span><span><span class="ldot" style="background:#F0997B"></span>Chi tiêu</span><span><span class="ldot" style="background:#185FA5"></span>Trả vay</span>';
+      var cfLabels = ['Lương','Chi tiêu','Trả vay','Còn lại'];
+      var res = income - expenses - monthly;
+      chartInst = new Chart(ctx, {
+        type:'bar',
+        data:{ labels:cfLabels, datasets:[{
+          label:'Triệu đồng',
+          data:[income, -expenses, -monthly, res],
+          backgroundColor:[
+            'rgba(24,95,165,0.7)',
+            'rgba(240,153,123,0.8)',
+            'rgba(186,117,23,0.8)',
+            res>=0?'rgba(29,158,117,0.8)':'rgba(226,75,74,0.8)'
+          ]
+        }]},
+        options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{ y:{ ticks:{ callback:function(v){return v+'tr';} } } } }
       });
     }
   }
 
   function switchTab(t) {
     currentTab = t;
-    document.getElementById('tabBalance').className = 'tab'+(t==='balance'?' active':'');
-    document.getElementById('tabBreakdown').className = 'tab'+(t==='breakdown'?' active':'');
+    ['balance','breakdown','cashflow'].forEach(function(id){
+      document.getElementById('tab'+id.charAt(0).toUpperCase()+id.slice(1)).className = 'tab'+(t===id?' active':'');
+    });
     calc();
   }
 
-  ['income','equity','loanAmt','term','rate','emergency'].forEach(function(id){
+  ['income','expenses','equity','loanAmt','term','rate','emergency'].forEach(function(id){
     document.getElementById(id).addEventListener('input', calc);
   });
   calc();
