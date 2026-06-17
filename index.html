@@ -118,6 +118,22 @@
 
   footer { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid #e5e5e2; font-size: 12px; color: #aaa; text-align: center; line-height: 1.8; }
   @media (max-width: 600px) { .residual-box { grid-template-columns: 1fr; } .sr label { min-width: 160px; } }
+
+  /* Savings Alternative Box */
+  .sav-box { background: #f0faf4; border: 1.5px solid #a5d6a7; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 1rem; position: relative; overflow: hidden; }
+  .sav-badge { position: absolute; top: 0; right: 0; background: #2e7d32; color: #fff; font-size: 11px; font-weight: 600; padding: 4px 14px; border-bottom-left-radius: 10px; letter-spacing: 0.4px; }
+  .sav-title { font-size: 15px; font-weight: 500; color: #1b5e20; margin-bottom: 4px; }
+  .sav-desc { font-size: 13px; color: #388e3c; margin-bottom: 1rem; line-height: 1.5; }
+  .sav-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1rem; }
+  @media (max-width: 560px) { .sav-grid { grid-template-columns: 1fr; } }
+  .sav-card { background: #fff; border-radius: 10px; padding: .85rem 1rem; border: 1px solid #c8e6c9; text-align: center; }
+  .sav-clabel { font-size: 11px; color: #558b2f; font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.4px; }
+  .sav-val { font-size: 20px; font-weight: 500; color: #1b5e20; }
+  .sav-val.gold { color: #e65100; }
+  .sav-sub { font-size: 11px; color: #81c784; margin-top: 3px; }
+  .sav-note { background: #fff; border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #558b2f; border-left: 3px solid #aed581; line-height: 1.8; }
+  .sav-note input[type=number] { width: 52px; text-align: center; border: 1px solid #a5d6a7; border-radius: 5px; background: #f0faf4; color: #1b5e20; font-size: 12px; font-weight: 600; padding: 2px 5px; }
+  .sav-note input[type=number]:focus { outline: none; border-color: #2e7d32; }
 </style>
 </head>
 <body>
@@ -221,6 +237,37 @@
   <div class="card">
     <h2 class="card-title">Cơ cấu vốn & giá trị nhà</h2>
     <div class="two-col" id="houseBreakdown"></div>
+  </div>
+
+  <!-- SAVINGS ALTERNATIVE BOX -->
+  <div class="sav-box">
+    <span class="sav-badge">🏦 NẾU GỬI TIẾT KIỆM</span>
+    <h3 class="sav-title">Thay vì vay, nếu gửi ngân hàng hàng tháng…</h3>
+    <p class="sav-desc">Dùng đúng số tiền trả góp mỗi tháng để gửi tiết kiệm tích lũy thay vì trả nợ.</p>
+    <div class="sav-grid">
+      <div class="sav-card">
+        <div class="sav-clabel">Tài sản sau <span id="savYearsLabel">20</span> năm</div>
+        <div class="sav-val" id="savTotalAsset">—</div>
+        <div class="sav-sub">gốc + lãi kép tích lũy</div>
+      </div>
+      <div class="sav-card">
+        <div class="sav-clabel">Tiền tiêu thêm / tháng</div>
+        <div class="sav-val" id="savExtraSpend">—</div>
+        <div class="sav-sub">không bị trả nợ mỗi tháng</div>
+      </div>
+      <div class="sav-card">
+        <div class="sav-clabel">Mua vàng / tháng</div>
+        <div class="sav-val gold" id="savGoldMoney">—</div>
+        <div class="sav-sub">≈ <span id="savGoldChis">—</span> chỉ vàng SJC</div>
+      </div>
+    </div>
+    <div class="sav-note">
+      <b>Giả định:</b> Lãi suất tiết kiệm
+      <input type="number" id="savRate" value="7" min="1" max="20" step="0.5" oninput="calcSavings()">%/năm &nbsp;·&nbsp;
+      Giá vàng SJC
+      <input type="number" id="savGoldPrice" value="120" min="50" max="500" step="5" oninput="calcSavings()">tr/chỉ
+      <span style="color:#8bc34a;margin-left:6px">✦ Chỉnh lãi suất & giá vàng để cập nhật.</span>
+    </div>
   </div>
 
   <!-- SCENARIOS -->
@@ -541,6 +588,13 @@
 
     calcScenarios(income, expenses, aRate);
     updateChart(loan, mr, n, monthly, income, expenses);
+
+    // update savings box with current values
+    window._savPMT   = monthly;
+    window._savYears = years;
+    window._savIncome  = income;
+    window._savExpenses = expenses;
+    calcSavings();
   }
 
   function calcScenarios(income, expenses, aRate) {
@@ -633,6 +687,45 @@
       document.getElementById('tab'+id.charAt(0).toUpperCase()+id.slice(1)).className = 'tab'+(t===id?' active':'');
     });
     calc();
+  }
+
+  function calcSavings() {
+    var pmtVal    = window._savPMT    || 0;
+    var yearsVal  = window._savYears  || 20;
+    var incomeVal = window._savIncome || 0;
+    var expVal    = window._savExpenses || 0;
+
+    var annualRate  = parseFloat(document.getElementById('savRate').value) || 7;
+    var goldPrice   = parseFloat(document.getElementById('savGoldPrice').value) || 120;
+
+    var r = annualRate / 100 / 12;
+    var n = yearsVal * 12;
+
+    // Future Value of monthly savings (lãi kép)
+    var fv = r > 0 ? pmtVal * (Math.pow(1 + r, n) - 1) / r : pmtVal * n;
+
+    // Tiền tiêu thêm mỗi tháng = số tiền trả góp (vì không phải trả nợ, tiền đó còn lại)
+    var extra = pmtVal;
+
+    // Số chỉ vàng mua được mỗi tháng bằng số tiền trả góp
+    var goldChis = goldPrice > 0 ? pmtVal / goldPrice : 0;
+
+    document.getElementById('savYearsLabel').textContent = yearsVal;
+
+    var elAsset = document.getElementById('savTotalAsset');
+    var elExtra = document.getElementById('savExtraSpend');
+    var elGoldM = document.getElementById('savGoldMoney');
+    var elGoldC = document.getElementById('savGoldChis');
+
+    if (pmtVal <= 0) {
+      elAsset.textContent = '—'; elExtra.textContent = '—'; elGoldM.textContent = '—'; elGoldC.textContent = '—';
+      return;
+    }
+
+    elAsset.textContent = fmtTr(fv);
+    elExtra.textContent = fmtM(extra) + '/tháng';
+    elGoldM.textContent = fmtM(pmtVal) + '/tháng';
+    elGoldC.textContent = goldChis < 1 ? (goldChis * 10).toFixed(2) + ' phân' : goldChis.toFixed(2) + ' chỉ';
   }
 
   ['income','expenses','equity','loanAmt','term','rate','emergency'].forEach(function(id){
