@@ -134,6 +134,23 @@
   .sav-note { background: #fff; border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #558b2f; border-left: 3px solid #aed581; line-height: 1.8; }
   .sav-note input[type=number] { width: 52px; text-align: center; border: 1px solid #a5d6a7; border-radius: 5px; background: #f0faf4; color: #1b5e20; font-size: 12px; font-weight: 600; padding: 2px 5px; }
   .sav-note input[type=number]:focus { outline: none; border-color: #2e7d32; }
+  .sav-divider { border: none; border-top: 1px dashed #b2dfdb; margin: 1rem 0; }
+  .sav-sub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: .75rem; }
+  @media (max-width: 560px) { .sav-sub-grid { grid-template-columns: 1fr; } }
+  .sav-sub-box { border-radius: 10px; padding: 1rem 1.1rem; }
+  .sav-sub-box.gold-box { background: #fff8e1; border: 1px solid #ffe082; }
+  .sav-sub-box.cash-box { background: #e8eaf6; border: 1px solid #c5cae9; }
+  .sav-sub-title { font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+  .sav-sub-box.gold-box .sav-sub-title { color: #e65100; }
+  .sav-sub-box.cash-box .sav-sub-title { color: #283593; }
+  .sav-sub-row { display: flex; justify-content: space-between; align-items: baseline; font-size: 12px; margin: 4px 0; }
+  .sav-sub-row span:first-child { color: #888; }
+  .sav-sub-row span:last-child { font-weight: 500; font-size: 14px; }
+  .sav-sub-box.gold-box .sav-sub-row span:last-child { color: #bf360c; }
+  .sav-sub-box.cash-box .sav-sub-row span:last-child { color: #1a237e; }
+  .sav-sub-note { font-size: 11px; margin-top: 8px; padding-top: 7px; border-top: 1px dashed; }
+  .sav-sub-box.gold-box .sav-sub-note { color: #f57c00; border-color: #ffe082; }
+  .sav-sub-box.cash-box .sav-sub-note { color: #5c6bc0; border-color: #c5cae9; }
 </style>
 </head>
 <body>
@@ -267,6 +284,29 @@
       Giá vàng SJC
       <input type="number" id="savGoldPrice" value="120" min="50" max="500" step="5" oninput="calcSavings()">tr/chỉ
       <span style="color:#8bc34a;margin-left:6px">✦ Chỉnh lãi suất & giá vàng để cập nhật.</span>
+    </div>
+
+    <hr class="sav-divider">
+    <p style="font-size:12px;color:#558b2f;margin-bottom:6px;">Nếu không tiêu gì ngoài chi phí bắt buộc — toàn bộ tiền dư dồn vào:</p>
+    <div class="sav-sub-grid">
+
+      <div class="sav-sub-box gold-box">
+        <div class="sav-sub-title">🥇 Chỉ mua vàng</div>
+        <div class="sav-sub-row"><span>Mua mỗi tháng</span><span id="goldOnlyMonthly">—</span></div>
+        <div class="sav-sub-row"><span>Số chỉ / tháng</span><span id="goldOnlyChisMonth">—</span></div>
+        <div class="sav-sub-row"><span>Tổng sau <span id="goldOnlyYears">20</span> năm</span><span id="goldOnlyTotalChis">—</span></div>
+        <div class="sav-sub-row"><span>Giá trị quy tiền</span><span id="goldOnlyTotalMoney">—</span></div>
+        <div class="sav-sub-note">Giả định giá vàng không đổi. Thực tế vàng thường tăng giá theo thời gian.</div>
+      </div>
+
+      <div class="sav-sub-box cash-box">
+        <div class="sav-sub-title">💵 Chỉ giữ tiền mặt</div>
+        <div class="sav-sub-row"><span>Để dành mỗi tháng</span><span id="cashOnlyMonthly">—</span></div>
+        <div class="sav-sub-row"><span>Sau <span id="cashOnlyYears">20</span> năm</span><span id="cashOnlyTotal">—</span></div>
+        <div class="sav-sub-row"><span>Sức mua thực (lạm phát 5%)</span><span id="cashOnlyReal">—</span></div>
+        <div class="sav-sub-note">Tiền mặt mất giá theo lạm phát. Lạm phát VN trung bình ~4–5%/năm.</div>
+      </div>
+
     </div>
   </div>
 
@@ -690,42 +730,69 @@
   }
 
   function calcSavings() {
-    var pmtVal    = window._savPMT    || 0;
-    var yearsVal  = window._savYears  || 20;
-    var incomeVal = window._savIncome || 0;
+    var pmtVal    = window._savPMT      || 0;
+    var yearsVal  = window._savYears    || 20;
+    var incomeVal = window._savIncome   || 0;
     var expVal    = window._savExpenses || 0;
 
-    var annualRate  = parseFloat(document.getElementById('savRate').value) || 7;
-    var goldPrice   = parseFloat(document.getElementById('savGoldPrice').value) || 120;
+    var annualRate = parseFloat(document.getElementById('savRate').value) || 7;
+    var goldPrice  = parseFloat(document.getElementById('savGoldPrice').value) || 120;
 
     var r = annualRate / 100 / 12;
     var n = yearsVal * 12;
 
-    // Future Value of monthly savings (lãi kép)
+    // ── Phần 1: Gửi tiết kiệm (số tiền = PMT) ─────────────────────────────
     var fv = r > 0 ? pmtVal * (Math.pow(1 + r, n) - 1) / r : pmtVal * n;
-
-    // Tiền tiêu thêm mỗi tháng = số tiền trả góp (vì không phải trả nợ, tiền đó còn lại)
     var extra = pmtVal;
-
-    // Số chỉ vàng mua được mỗi tháng bằng số tiền trả góp
     var goldChis = goldPrice > 0 ? pmtVal / goldPrice : 0;
 
     document.getElementById('savYearsLabel').textContent = yearsVal;
 
-    var elAsset = document.getElementById('savTotalAsset');
-    var elExtra = document.getElementById('savExtraSpend');
-    var elGoldM = document.getElementById('savGoldMoney');
-    var elGoldC = document.getElementById('savGoldChis');
-
     if (pmtVal <= 0) {
-      elAsset.textContent = '—'; elExtra.textContent = '—'; elGoldM.textContent = '—'; elGoldC.textContent = '—';
+      ['savTotalAsset','savExtraSpend','savGoldMoney','savGoldChis',
+       'goldOnlyMonthly','goldOnlyChisMonth','goldOnlyTotalChis','goldOnlyTotalMoney',
+       'cashOnlyMonthly','cashOnlyTotal','cashOnlyReal'].forEach(function(id){
+        var el = document.getElementById(id); if(el) el.textContent = '—';
+      });
       return;
     }
 
-    elAsset.textContent = fmtTr(fv);
-    elExtra.textContent = fmtM(extra) + '/tháng';
-    elGoldM.textContent = fmtM(pmtVal) + '/tháng';
-    elGoldC.textContent = goldChis < 1 ? (goldChis * 10).toFixed(2) + ' phân' : goldChis.toFixed(2) + ' chỉ';
+    document.getElementById('savTotalAsset').textContent = fmtTr(fv);
+    document.getElementById('savExtraSpend').textContent = fmtM(extra) + '/tháng';
+    document.getElementById('savGoldMoney').textContent  = fmtM(pmtVal) + '/tháng';
+    document.getElementById('savGoldChis').textContent   = goldChis < 1 ? (goldChis * 10).toFixed(2) + ' phân' : goldChis.toFixed(2) + ' chỉ';
+
+    // ── Phần 2: Chỉ mua vàng (tiền dư = lương − chi tiêu bắt buộc) ────────
+    var freeCash = Math.max(0, incomeVal - expVal); // tiền dư sau chi tiêu bắt buộc
+    var goldPerMonth = goldPrice > 0 ? freeCash / goldPrice : 0;
+    var totalChis = goldPerMonth * n;
+    var totalGoldMoney = totalChis * goldPrice;
+
+    var elGoldYears = document.getElementById('goldOnlyYears');
+    if (elGoldYears) elGoldYears.textContent = yearsVal;
+    document.getElementById('goldOnlyMonthly').textContent   = fmtM(freeCash) + '/tháng';
+    document.getElementById('goldOnlyChisMonth').textContent = goldPerMonth < 1
+      ? (goldPerMonth * 10).toFixed(3) + ' phân'
+      : goldPerMonth.toFixed(3) + ' chỉ';
+    document.getElementById('goldOnlyTotalChis').textContent = totalChis < 1
+      ? (totalChis * 10).toFixed(1) + ' phân'
+      : totalChis.toFixed(1) + ' chỉ';
+    document.getElementById('goldOnlyTotalMoney').textContent = fmtTr(totalGoldMoney);
+
+    // ── Phần 3: Chỉ giữ tiền mặt (tiền dư = lương − chi tiêu bắt buộc) ───
+    var cashTotal = freeCash * n; // không có lãi, không tăng
+    var inflationRate = 0.05 / 12; // 5%/năm
+    // Sức mua thực: quy về giá trị hiện tại, mỗi đồng để dành tháng t còn lại (1+0.05)^(-t/12) sức mua
+    var realValue = 0;
+    for (var t = 1; t <= n; t++) {
+      realValue += freeCash / Math.pow(1 + 0.05, t / 12);
+    }
+
+    var elCashYears = document.getElementById('cashOnlyYears');
+    if (elCashYears) elCashYears.textContent = yearsVal;
+    document.getElementById('cashOnlyMonthly').textContent = fmtM(freeCash) + '/tháng';
+    document.getElementById('cashOnlyTotal').textContent   = fmtTr(cashTotal);
+    document.getElementById('cashOnlyReal').textContent    = fmtTr(realValue);
   }
 
   ['income','expenses','equity','loanAmt','term','rate','emergency'].forEach(function(id){
